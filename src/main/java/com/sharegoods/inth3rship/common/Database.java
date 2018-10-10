@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database
 {
     private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:sharegoods;DB_CLOSE_DELAY=-1";
+    private static final String DB_CONNECTION = "jdbc:h2:./sharegoods;AUTO_SERVER=TRUE";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
 

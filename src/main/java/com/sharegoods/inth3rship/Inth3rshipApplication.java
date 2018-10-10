@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Inth3rshipApplication
 {
-
-
     public static void main(String[] args)
     {
 
