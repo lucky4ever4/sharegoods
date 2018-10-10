@@ -1,6 +1,6 @@
 #FileLock
-#Wed Oct 10 14:39:43 EEST 2018
-hostName=172.17.41.124
-id=1665dc67ae43df4f8679c29d880346bbfd72abb6227
+#Wed Oct 10 15:49:12 EEST 2018
+server=192.168.224.1\:63457
+hostName=WIN-OG6BBBMFCRN
 method=file
-server=172.17.41.124\:59105
+id=1665e0608281ea1cfa6ad0294dbd95bc690fa5ea552
