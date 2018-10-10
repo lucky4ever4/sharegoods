@@ -1,16 +1,27 @@
 package com.sharegoods.inth3rship.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User
 {
-    private final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
-    public User(long id, String firstName, String lastName, String email, String password)
+    public User()
     {
-        this.id = id;
+    }
+
+    public User(String firstName, String lastName, String email, String password)
+    {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

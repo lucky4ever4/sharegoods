@@ -1,20 +1,24 @@
 package com.sharegoods.inth3rship.restcontrollers;
 
-import com.sharegoods.inth3rship.dao.UserDAO;
+import com.sharegoods.inth3rship.services.UserService;
 import com.sharegoods.inth3rship.models.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController
 {
+    @Autowired
+    private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users")
-    public User getUserByLoginData(@RequestParam(value = "email") String email,
-                                   @RequestParam(value = "password") String password)
+    public void setUserService (UserService userService)
     {
-        return UserDAO.getUserByLoginData(email, password);
+        this.userService = userService;
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUSerById(@PathVariable(name = "id") Long id)
+    {
+        return userService.getUserById(id);
     }
 }

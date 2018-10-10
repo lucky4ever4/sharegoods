@@ -9,9 +9,6 @@ public class Inth3rshipApplication
 {
     public static void main(String[] args)
     {
-
-        CreateTables.GenerateTables();
-
         SpringApplication.run(Inth3rshipApplication.class, args);
     }
 }
