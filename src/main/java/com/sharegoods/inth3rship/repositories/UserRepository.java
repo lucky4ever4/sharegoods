@@ -1,4 +1,4 @@
-package com.sharegoods.inth3rship.repository;
+package com.sharegoods.inth3rship.repositories;
 
 import com.sharegoods.inth3rship.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
