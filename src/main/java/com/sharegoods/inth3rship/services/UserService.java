@@ -24,6 +24,7 @@ public class UserService {
     }
 
     public User getUserByLoginData(String email, String password) {
+        password = HashPassword.getPasswordHash(password.getBytes(), "SHA-512");
         return userRepository.findByEmailAndPassword(email, password);
     }
 
