@@ -1,6 +1,0 @@
-#FileLock
-#Thu Oct 11 11:14:15 EEST 2018
-hostName=172.17.41.135
-id=1666230bce459f1a8d00d9aaa5a096bad9290600e1a
-method=file
-server=172.17.41.135\:51158
