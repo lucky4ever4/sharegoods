@@ -20,9 +20,8 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    public User getUserByLoginData(@RequestParam("email") String email,
-                                   @RequestParam("password") String password) {
-        return userService.getUserByLoginData(email, password);
+    public User getUserByLoginData(@RequestParam("email") String email) {
+        return userService.getUserByLoginData(email);
     }
 
     @PostMapping("/users")
