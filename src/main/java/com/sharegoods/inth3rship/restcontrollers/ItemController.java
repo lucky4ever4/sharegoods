@@ -24,4 +24,6 @@ public class ItemController {
         return itemService.getItemsByUserId(id);
     }
 
+    @GetMapping("/items")
+    public List<Item> getItems() {return itemService.getItems();}
 }

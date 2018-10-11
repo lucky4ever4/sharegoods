@@ -27,6 +27,7 @@ public class CreateTables
     {
         return args -> {
             repository.save(new Item(1L, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
+            repository.save(new Item(2L, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
         };
     }
 }

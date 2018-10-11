@@ -1,6 +1,11 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### DB ###
+sharedgoods.lock.db
+sharedgoods.mv.db
+sharedgoods.trace.db
+
 ### STS ###
 .apt_generated
 .classpath
