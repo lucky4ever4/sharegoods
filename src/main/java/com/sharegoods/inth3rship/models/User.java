@@ -5,7 +5,7 @@ import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +58,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = HashPassword.getPasswordHash(password.getBytes(), "SHA-512");
     }
 }

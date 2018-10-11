@@ -25,4 +25,13 @@ public class UserController {
         return userService.getUserByLoginData(email, password);
     }
 
+    @PostMapping("/users")
+    public User createUser(@RequestBody User newUser) {
+        return userService.createNewUser(newUser);
+    }
+
+    @PutMapping("/users/{id}")
+    public User updateUser(@RequestBody User user, @PathVariable(name="id") Long id) {
+        return userService.updateUser(id, user);
+    }
 }

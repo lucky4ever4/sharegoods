@@ -11,14 +11,20 @@ import org.springframework.context.annotation.Configuration;
 import java.sql.Date;
 
 @Configuration
-public class CreateTables
-{
+public class CreateTables {
     @Bean
-    CommandLineRunner usersSampleData(UserRepository repository)
-    {
+    CommandLineRunner usersSampleData(UserRepository repository) {
         return args -> {
-            repository.save(new User("Oxana","Lastname","oxana@gmail.com","123"));
-            repository.save(new User("Ion","Lastname","ion@gmail.com","asjashdl"));
+            repository.save(new User("Oxana", "Lastname", "oxana@gmail.com", "123"));
+            repository.save(new User("Ion", "Lastname", "ion@gmail.com", "asjashdl"));
+        };
+    }
+
+    @Bean
+    CommandLineRunner itemsSampleData(ItemRepository repository) {
+        return args -> {
+            repository.save(new Item(1L, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
+            repository.save(new Item(2L, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
         };
     }
 
@@ -27,7 +33,6 @@ public class CreateTables
     {
         return args -> {
             repository.save(new Item(1L, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
-            repository.save(new Item(2L, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
         };
     }
 }
