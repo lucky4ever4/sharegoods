@@ -24,4 +24,8 @@ public class UserService
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.get();
     }
+
+    public User getUserByLoginData(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 }

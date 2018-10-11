@@ -1,13 +1,10 @@
 package com.sharegoods.inth3rship.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 @Entity
+@Table(name="Items")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

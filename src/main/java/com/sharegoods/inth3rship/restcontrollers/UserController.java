@@ -18,4 +18,11 @@ public class UserController {
     public User getUSerById(@PathVariable(name = "id") Long id) {
         return userService.getUserById(id);
     }
+
+    @PostMapping("/users/login")
+    public User getUserByLoginData(@RequestParam("email") String email,
+                                   @RequestParam("password") String password) {
+        return userService.getUserByLoginData(email, password);
+    }
+
 }

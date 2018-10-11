@@ -2,12 +2,10 @@ package com.sharegoods.inth3rship.models;
 
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
