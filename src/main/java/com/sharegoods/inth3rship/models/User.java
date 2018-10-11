@@ -58,6 +58,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = HashPassword.getPasswordHash(password.getBytes(), "SHA-512");
+        this.password = password;
     }
 }

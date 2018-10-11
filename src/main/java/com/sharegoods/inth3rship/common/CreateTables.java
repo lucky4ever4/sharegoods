@@ -27,12 +27,4 @@ public class CreateTables {
             repository.save(new Item(2L, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
         };
     }
-
-    @Bean
-    CommandLineRunner itemsSampleData(ItemRepository repository)
-    {
-        return args -> {
-            repository.save(new Item(1L, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
-        };
-    }
 }

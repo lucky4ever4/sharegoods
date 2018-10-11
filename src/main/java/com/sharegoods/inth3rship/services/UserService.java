@@ -37,7 +37,9 @@ public class UserService {
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail((user.getEmail()));
-        userToUpdate.setPassword(user.getPassword());
+        if (!user.getPassword().isEmpty()) {
+            userToUpdate.setPassword(HashPassword.getPasswordHash(user.getPassword().getBytes(), "SHA-512"));
+        }
         return userRepository.save(userToUpdate);
     }
 }
