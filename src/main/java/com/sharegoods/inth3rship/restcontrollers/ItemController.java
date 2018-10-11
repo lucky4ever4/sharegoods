@@ -3,9 +3,7 @@ package com.sharegoods.inth3rship.restcontrollers;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    public void setItemService (ItemService itemService) {
+    public void setItemService(ItemService itemService) {
         this.itemService = itemService;
     }
 
@@ -25,5 +23,12 @@ public class ItemController {
     }
 
     @GetMapping("/items")
-    public List<Item> getItems() {return itemService.getItems();}
+    public List<Item> getItems() {
+        return itemService.getItems();
+    }
+
+    @PostMapping("/items")
+    public Item createItem(@RequestBody Item newItem) {
+        return itemService.createNewItem(newItem);
+    }
 }

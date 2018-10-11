@@ -24,4 +24,16 @@ public class ItemService {
     public List<Item> getItems() {
         return itemRepository.findAll();
     }
+
+    public Item createNewItem(Item newItem) {
+        return itemRepository.save(newItem);
+
+    }
+
+    public Item updateItem(Long userId, Item itemToUpdate) {
+        Item itemFromDataBase = itemRepository.findByUserIdAndItemId(userId, itemToUpdate.getId());
+        itemFromDataBase.setTitle(itemToUpdate.getTitle());
+        itemFromDataBase.setDescription(itemToUpdate.getDescription());
+        return itemRepository.save(itemToUpdate);
+    }
 }
