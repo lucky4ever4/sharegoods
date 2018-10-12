@@ -3,10 +3,10 @@ package com.sharegoods.inth3rship.services;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.models.User;
 import com.sharegoods.inth3rship.repositories.ItemRepository;
-import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +36,11 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item createNewItem(Item newItem) {
+    public Item createNewItem(Long userId, String title, String description) {
+        User user = userService.getUserById(userId);
+        java.util.Date dateNow = new java.util.Date();
+        Date date = new Date(dateNow.getTime());
+        Item newItem = new Item(user, date, title, description);
         return itemRepository.save(newItem);
 
     }

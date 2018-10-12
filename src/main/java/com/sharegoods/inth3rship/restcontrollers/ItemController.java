@@ -27,9 +27,11 @@ public class ItemController {
         return itemService.getItems();
     }
 
-    @PostMapping("/items")
-    public Item createItem(@RequestBody Item newItem) {
-        return itemService.createNewItem(newItem);
+    @PostMapping("/users/{id}/items")
+    public Item createItem(@PathVariable("id") Long userId,
+                            @RequestParam("title") String title,
+                            @RequestParam("description") String description) {
+        return itemService.createNewItem(userId, title, description);
     }
 
     @GetMapping("/items/{id}")
