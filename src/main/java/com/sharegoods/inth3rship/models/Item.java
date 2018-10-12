@@ -13,7 +13,6 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @ElementCollection(targetClass=User.class)
     @NotNull
     public User user;
 

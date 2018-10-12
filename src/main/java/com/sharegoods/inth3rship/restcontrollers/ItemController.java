@@ -1,11 +1,15 @@
 package com.sharegoods.inth3rship.restcontrollers;
 
+import com.sharegoods.inth3rship.dto.ItemDto;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class ItemController {
@@ -28,15 +32,24 @@ public class ItemController {
     }
 
     @PostMapping("/users/{id}/items")
-    public Item createItem(@PathVariable("id") Long userId,
-                           @RequestParam("title") String title,
-                           @RequestParam("description") String description) {
-        return itemService.createNewItem(userId, title, description);
+    public ResponseEntity<ItemDto> createItem(@PathVariable("id") Long userId,
+                                     @RequestParam("title") String title,
+                                     @RequestParam("description") String description) {
+        Item item = itemService.createNewItem(userId, title, description);
+        return new ResponseEntity<>(new ItemDto(item), HttpStatus.OK);
     }
 
     @GetMapping("/items/{id}")
-    public Item getItemById(@PathVariable("id") Long id) {
-        return itemService.getItemById(id);
+    public ResponseEntity getItemById(@PathVariable("id") Long id) {
+        try
+        {
+            Item item = itemService.getItemById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(new ItemDto(item));
+        }
+        catch (NoSuchElementException e)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
+        }
     }
 
     @DeleteMapping("/items/{id}")
