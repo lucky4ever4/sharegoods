@@ -1,6 +1,7 @@
 package com.sharegoods.inth3rship.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -10,25 +11,22 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique=true, nullable=false)
-    private Long userId;
-
-    @Column(unique=true, nullable=false)
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ElementCollection(targetClass=User.class)
+    @NotNull
     public User user;
 
+    @NotNull
     private Date dateTime;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
     private String title;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
     private String description;
 
-    public Item() { // For JPA
+    public Item() { // Default constuctor for JPA
     }
 
     public Item(User user, Date dateTime, String title, String description) {

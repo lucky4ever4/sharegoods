@@ -3,6 +3,7 @@ package com.sharegoods.inth3rship.models;
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Users")
@@ -11,19 +12,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
     private String firstName;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
     private String lastName;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
+    @Column(unique=true)
     private String email;
 
-    @Column(unique=true, nullable=false)
+    @NotNull
     private String password;
 
-    public User() {  // For JPA
+    public User() {  // Default constructor for JPA
     }
 
     public User(String firstName, String lastName, String email, String password) {
