@@ -54,12 +54,11 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    //Update item we will fix on stage #5
-//    public Item updateItem(Long userId, Item itemToUpdate) {
-//        Item itemFromDataBase = itemRepository.findByUserIdAndId(userId, itemToUpdate.getId());
-//        itemFromDataBase.setTitle(itemToUpdate.getTitle());
-//        itemFromDataBase.setDescription(itemToUpdate.getDescription());
-//        itemFromDataBase.setDateTime(itemToUpdate.getDateTime());
-//        return itemRepository.save(itemToUpdate);
-//    }
+    public Item updateItem(Long itemId, String title, String description) {
+        Item item = getItemById(itemId);
+        item.setTitle(title);
+        item.setDescription(description);
+        return itemRepository.save(item);
+
+    }
 }

@@ -29,8 +29,8 @@ public class ItemController {
 
     @PostMapping("/users/{id}/items")
     public Item createItem(@PathVariable("id") Long userId,
-                            @RequestParam("title") String title,
-                            @RequestParam("description") String description) {
+                           @RequestParam("title") String title,
+                           @RequestParam("description") String description) {
         return itemService.createNewItem(userId, title, description);
     }
 
@@ -44,9 +44,10 @@ public class ItemController {
         itemService.deleteItem(id);
     }
 
-    //Update item we will fix on #5
-//    @PutMapping("/users/{id}/items/{itemId}")
-//    public Item updateItem(@PathVariable("id") Long userId, @RequestBody Item itemToUpdate) {
-//        return itemService.updateItem(userId, itemToUpdate);
-//    }
+    @PutMapping("/users/{userId}/items/{itemId}")
+    public Item updateItem(@PathVariable("itemId") Long itemId,
+                           @RequestParam("title") String title,
+                           @RequestParam("description") String description) {
+        return itemService.updateItem(itemId, title, description);
+    }
 }
