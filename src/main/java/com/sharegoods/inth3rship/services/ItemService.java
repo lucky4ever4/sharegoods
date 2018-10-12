@@ -1,7 +1,9 @@
 package com.sharegoods.inth3rship.services;
 
 import com.sharegoods.inth3rship.models.Item;
+import com.sharegoods.inth3rship.models.User;
 import com.sharegoods.inth3rship.repositories.ItemRepository;
+import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,16 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
+    @Autowired
+    private UserService userService;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     public List<Item> getItemsByUserId(Long id) {
-        return itemRepository.findByUserId(id);
+        User user = userService.getUserById(id);
+        return itemRepository.findByUser(user);
     }
 
     public List<Item> getItems() {

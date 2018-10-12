@@ -12,19 +12,27 @@ import java.sql.Date;
 
 @Configuration
 public class CreateTables {
+
+    User oxana;
+    User ion;
+
     @Bean
     CommandLineRunner usersSampleData(UserRepository repository) {
+
+        oxana = new User("Oxana", "Lastname", "oxana@gmail.com", "123");
+        ion = new User("Ion", "Lastname", "ion@gmail.com", "asjashdl");
+
         return args -> {
-            repository.save(new User("Oxana", "Lastname", "oxana@gmail.com", "123"));
-            repository.save(new User("Ion", "Lastname", "ion@gmail.com", "asjashdl"));
+            repository.save(oxana);
+            repository.save(ion);
         };
     }
 
     @Bean
     CommandLineRunner itemsSampleData(ItemRepository repository) {
         return args -> {
-            repository.save(new Item(1L, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
-            repository.save(new Item(2L, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
+            repository.save(new Item(oxana, Date.valueOf("2018-10-10"), "myTitle", "laptop"));
+            repository.save(new Item(oxana, Date.valueOf("2018-10-11"), "Phone", "Lenovo p780 good condition 9/10"));
         };
     }
 }

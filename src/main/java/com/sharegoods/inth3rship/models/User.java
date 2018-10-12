@@ -3,6 +3,7 @@ package com.sharegoods.inth3rship.models;
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -14,6 +15,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+
 
     public User() {
     }
@@ -60,4 +62,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
