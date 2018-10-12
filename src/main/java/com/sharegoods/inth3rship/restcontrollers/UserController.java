@@ -3,6 +3,7 @@ package com.sharegoods.inth3rship.restcontrollers;
 import com.sharegoods.inth3rship.services.UserService;
 import com.sharegoods.inth3rship.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    public User getUserByLoginData(@RequestParam("email") String email) {
-        return userService.getUserByLoginData(email);
+    public ResponseEntity<User> getUserByLoginData(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userService.getUserByLoginData(email, password);
     }
 
     @PostMapping("/users")
