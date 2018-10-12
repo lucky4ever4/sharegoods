@@ -32,6 +32,16 @@ public class ItemController {
         return itemService.createNewItem(newItem);
     }
 
+    @GetMapping("/items/{id}")
+    public Item getItemById(@PathVariable("id") Long id) {
+        return itemService.getItemById(id);
+    }
+
+    @DeleteMapping("/items/{id}")
+    public void deleteItem(@PathVariable("id") Long id) {
+        itemService.deleteItem(id);
+    }
+
     //Update item we will fix on #5
 //    @PutMapping("/users/{id}/items/{itemId}")
 //    public Item updateItem(@PathVariable("id") Long userId, @RequestBody Item itemToUpdate) {

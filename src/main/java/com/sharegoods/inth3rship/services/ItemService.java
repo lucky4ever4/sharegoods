@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -29,6 +30,16 @@ public class ItemService {
         return itemRepository.save(newItem);
 
     }
+
+    public Item getItemById(Long id) {
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        return optionalItem.get();
+    }
+
+    public void deleteItem(Long id) {
+        itemRepository.deleteById(id);
+    }
+
     //Update item we will fix on stage #5
 //    public Item updateItem(Long userId, Item itemToUpdate) {
 //        Item itemFromDataBase = itemRepository.findByUserIdAndId(userId, itemToUpdate.getId());
