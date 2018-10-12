@@ -31,4 +31,10 @@ public class ItemController {
     public Item createItem(@RequestBody Item newItem) {
         return itemService.createNewItem(newItem);
     }
+
+    //Update item we will fix on #5
+//    @PutMapping("/users/{id}/items/{itemId}")
+//    public Item updateItem(@PathVariable("id") Long userId, @RequestBody Item itemToUpdate) {
+//        return itemService.updateItem(userId, itemToUpdate);
+//    }
 }

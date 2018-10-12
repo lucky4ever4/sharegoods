@@ -29,11 +29,12 @@ public class ItemService {
         return itemRepository.save(newItem);
 
     }
-
-    public Item updateItem(Long userId, Item itemToUpdate) {
-        Item itemFromDataBase = itemRepository.findByUserIdAndItemId(userId, itemToUpdate.getId());
-        itemFromDataBase.setTitle(itemToUpdate.getTitle());
-        itemFromDataBase.setDescription(itemToUpdate.getDescription());
-        return itemRepository.save(itemToUpdate);
-    }
+    //Update item we will fix on stage #5
+//    public Item updateItem(Long userId, Item itemToUpdate) {
+//        Item itemFromDataBase = itemRepository.findByUserIdAndId(userId, itemToUpdate.getId());
+//        itemFromDataBase.setTitle(itemToUpdate.getTitle());
+//        itemFromDataBase.setDescription(itemToUpdate.getDescription());
+//        itemFromDataBase.setDateTime(itemToUpdate.getDateTime());
+//        return itemRepository.save(itemToUpdate);
+//    }
 }
