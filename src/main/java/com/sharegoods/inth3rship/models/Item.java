@@ -1,12 +1,7 @@
 package com.sharegoods.inth3rship.models;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "Items")
@@ -15,16 +10,25 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique=true, nullable=false)
+    private Long userId;
+
+    @Column(unique=true, nullable=false)
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @ElementCollection(targetClass=User.class)
     public User user;
 
     private Date dateTime;
+
+    @Column(unique=true, nullable=false)
     private String title;
+
+    @Column(unique=true, nullable=false)
     private String description;
 
-    public Item() {
+    public Item() { // For JPA
     }
 
     public Item(User user, Date dateTime, String title, String description) {

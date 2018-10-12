@@ -3,7 +3,6 @@ package com.sharegoods.inth3rship.models;
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -11,13 +10,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(unique=true, nullable=false)
     private String firstName;
+
+    @Column(unique=true, nullable=false)
     private String lastName;
+
+    @Column(unique=true, nullable=false)
     private String email;
+
+    @Column(unique=true, nullable=false)
     private String password;
 
-
-    public User() {
+    public User() {  // For JPA
     }
 
     public User(String firstName, String lastName, String email, String password) {
@@ -62,5 +68,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
