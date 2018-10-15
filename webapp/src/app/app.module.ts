@@ -3,15 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/userComponent/user.component';
 
-import {UserService} from "./services/userService/user.service";
+import { UserComponent } from './components/userComponent/user.component';
+import { UserService } from "./services/userService/user.service";
+
+import { ItemComponent } from './components/itemComponent/item.component';
+import { ItemService }  from './services/itemService/item.service';
+
 import {HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
