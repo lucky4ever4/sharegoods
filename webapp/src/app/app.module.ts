@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/user/user.component';
+import { UserComponent } from './components/userComponent/user.component';
 
-import {UserService} from "./services/user.service";
+import {UserService} from "./services/userService/user.service";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
