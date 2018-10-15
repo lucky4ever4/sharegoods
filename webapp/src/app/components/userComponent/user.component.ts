@@ -5,7 +5,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/userService/user.service';
 
 @Component({
-  selector: 'app-listuser',
+  selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
@@ -19,7 +19,6 @@ export class UserComponent implements OnInit {
       .subscribe( data => {
         this.users = data;
       });
-    console.log(this.users);
   }
 
 }
