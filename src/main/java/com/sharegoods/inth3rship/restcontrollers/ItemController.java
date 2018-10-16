@@ -1,12 +1,14 @@
 package com.sharegoods.inth3rship.restcontrollers;
 
 import com.sharegoods.inth3rship.dto.ItemDto;
+import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -53,8 +55,9 @@ public class ItemController {
     @PostMapping("/users/{id}/items")
     public ResponseEntity createItem(@PathVariable("id") Long userId,
                                      @RequestParam("title") String title,
-                                     @RequestParam("description") String description) {
-        Item item = itemService.createNewItem(userId, title, description);
+                                     @RequestParam("description") String description,
+                                     @RequestParam("file") List<MultipartFile> imageFiles) {
+        Item item = itemService.createNewItem(userId, title, description, imageFiles);
         ItemDto itemDto = new ItemDto(item);
     return ResponseEntity.status(HttpStatus.OK).body(itemDto);
     }
