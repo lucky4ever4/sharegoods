@@ -3,6 +3,8 @@ package com.sharegoods.inth3rship.models;
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,7 +20,9 @@ public class User {
     @NotNull
     private String lastName;
 
+    @Email
     @NotNull
+    @NotEmpty
     @Column(unique=true)
     private String email;
 
