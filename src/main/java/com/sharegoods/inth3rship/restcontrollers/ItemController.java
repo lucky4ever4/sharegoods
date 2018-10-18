@@ -1,8 +1,11 @@
 package com.sharegoods.inth3rship.restcontrollers;
 
+import com.sharegoods.inth3rship.dto.ImageDto;
+import com.sharegoods.inth3rship.dto.ItemDetailsDto;
 import com.sharegoods.inth3rship.dto.ItemDto;
 import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
+import com.sharegoods.inth3rship.services.ImageService;
 import com.sharegoods.inth3rship.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/users/{userId}/items")
     public ResponseEntity getItemsByUserId(@PathVariable("userId") Long userId) {
@@ -61,7 +67,11 @@ public class ItemController {
     public ResponseEntity getItemById(@PathVariable("id") Long id) {
         try {
             Item item = itemService.getItemById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(new ItemDto(item));
+            List<Image> itemImages = imageService.getImagesByItemId(id);
+            ItemDto itemDto = new ItemDto(item);
+            List<ImageDto> imageDtoList = ImageDto.getImageDtoList(itemImages);
+            ItemDetailsDto itemDetailsDto = new ItemDetailsDto(itemDto, imageDtoList);
+            return ResponseEntity.status(HttpStatus.OK).body(itemDetailsDto);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
         }

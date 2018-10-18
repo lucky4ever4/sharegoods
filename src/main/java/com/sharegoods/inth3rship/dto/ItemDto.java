@@ -1,10 +1,9 @@
 package com.sharegoods.inth3rship.dto;
 
 import com.sharegoods.inth3rship.models.Item;
-import com.sharegoods.inth3rship.models.User;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -13,6 +12,7 @@ public class ItemDto {
     Long userId;
     String title;
     String description;
+    Date dateTime;
 
     public ItemDto() {
     }
@@ -22,6 +22,7 @@ public class ItemDto {
         this.title = item.getTitle();
         this.description = item.getDescription();
         this.userId = item.getUser().getId();
+        this.dateTime = item.getDateTime();
     }
 
     public static List<ItemDto> getItemDtoList(List<Item> itemList) {
@@ -64,5 +65,13 @@ public class ItemDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 }
