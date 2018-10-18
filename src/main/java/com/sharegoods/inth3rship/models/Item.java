@@ -1,5 +1,8 @@
 package com.sharegoods.inth3rship.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -14,6 +17,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public User user;
 
     @NotNull

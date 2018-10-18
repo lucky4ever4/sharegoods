@@ -1,5 +1,8 @@
 package com.sharegoods.inth3rship.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +21,7 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "item_id")
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public Item item;
 
     public Image() { // Default constructor for JPA
