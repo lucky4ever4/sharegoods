@@ -1,6 +1,5 @@
 package com.sharegoods.inth3rship.services;
 
-import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.models.User;
 import com.sharegoods.inth3rship.repositories.ItemRepository;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,16 +24,8 @@ public class ItemService {
     @Autowired
     private UserService userService;
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     @Autowired
     private ImageService imageService;
-
-    public void setImageService(ImageService imageService) {
-        this.imageService = imageService;
-    }
 
     public List<Item> getItemsByUserId(Long id) {
         User user = userService.getUserById(id);
@@ -52,21 +42,7 @@ public class ItemService {
         Date date = new Date(dateNow.getTime());
         Item newItem = new Item(user, date, title, description);
         itemRepository.save(newItem);
-
-        List<Image> images = new ArrayList();
-        byte[] arrayImg;
-        if (imageFiles != null && !imageFiles.isEmpty()) {
-            for (MultipartFile imageFile : imageFiles) {
-                arrayImg = new byte[(int) imageFile.getSize()];
-                try {
-                    imageFile.getInputStream().read(arrayImg);
-                    images.add(new Image(newItem, imageFile.getOriginalFilename(), arrayImg));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            imageService.createImages(images);
-        }
+        imageService.createImages(newItem, imageFiles);
         return newItem;
     }
 
@@ -79,11 +55,11 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    public Item updateItem(Long itemId, String title, String description) {
+    public Item updateItem(Long itemId, String title, String description, List<MultipartFile> imageFiles) {
         Item item = getItemById(itemId);
         item.setTitle(title);
         item.setDescription(description);
+        imageService.updateItemImages(item, imageFiles);
         return itemRepository.save(item);
-
     }
 }

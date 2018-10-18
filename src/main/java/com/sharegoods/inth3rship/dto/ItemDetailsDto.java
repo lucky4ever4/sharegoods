@@ -6,9 +6,6 @@ public class ItemDetailsDto {
     private ItemDto itemDto;
     private List<ImageDto> imageDtoList;
 
-    public ItemDetailsDto() {
-    }
-
     public ItemDetailsDto(ItemDto itemDto, List<ImageDto> imageDtoList) {
         this.itemDto = itemDto;
         this.imageDtoList = imageDtoList;

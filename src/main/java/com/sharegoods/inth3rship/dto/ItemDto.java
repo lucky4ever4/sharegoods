@@ -14,9 +14,6 @@ public class ItemDto {
     String description;
     Date dateTime;
 
-    public ItemDto() {
-    }
-
     public ItemDto(Item item) {
         this.id = item.getId();
         this.title = item.getTitle();

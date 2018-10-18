@@ -90,9 +90,10 @@ public class ItemController {
     @PutMapping("/items/{itemId}")
     public ResponseEntity updateItem(@PathVariable("itemId") Long itemId,
                                      @RequestParam("title") String title,
-                                     @RequestParam("description") String description) {
+                                     @RequestParam("description") String description,
+                                     @RequestParam("file") List<MultipartFile> imageFiles){
         try {
-            Item item = itemService.updateItem(itemId, title, description);
+            Item item = itemService.updateItem(itemId, title, description, imageFiles);
             ItemDto itemDto = new ItemDto(item);
             return ResponseEntity.status(HttpStatus.OK).body(itemDto);
         } catch (NoSuchElementException e) {

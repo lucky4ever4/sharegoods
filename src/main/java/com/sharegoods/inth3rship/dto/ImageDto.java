@@ -11,9 +11,6 @@ public class ImageDto {
     private String name;
     private String imageBase64;
 
-    public ImageDto() {
-    }
-
     public ImageDto(Image image) {
         this.name = image.getName();
         imageBase64 = Base64Utils.encodeToString(image.getImageData());
