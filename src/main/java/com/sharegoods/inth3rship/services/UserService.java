@@ -1,24 +1,42 @@
 package com.sharegoods.inth3rship.services;
 
+import com.sharegoods.inth3rship.common.MyUserPrincipal;
 import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 import com.sharegoods.inth3rship.models.User;
 import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    // The loadUserByUsername method is required by the UserDetailsService interface, which is used for Spring Security
+    // However we identify user by email, hence the implementation is for email
+    @Override
+    public UserDetails loadUserByUsername(String email) {
+        User user = findUserByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException(email);
+        }
+        return new MyUserPrincipal(user);
+    }
+
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public List<User> getAllUsers() {
@@ -30,21 +48,18 @@ public class UserService {
         return optionalUser.get();
     }
 
-    public ResponseEntity<User> getUserByLoginData(String email, String password) {
+    public boolean checkLoginData(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            password = HashPassword.getPasswordHash(password.getBytes(), "SHA-512");
-            if (password.equals(user.getPassword())) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            return passwordEncoder.matches(password,user.getPassword());
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return false;
     }
 
     public User createNewUser(User newUser) {
-        newUser.setPassword(HashPassword.getPasswordHash(newUser.getPassword().getBytes(), "SHA-512"));
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         return userRepository.save(newUser);
     }
 
@@ -54,7 +69,8 @@ public class UserService {
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail((user.getEmail()));
         if (!user.getPassword().isEmpty()) {
-            userToUpdate.setPassword(HashPassword.getPasswordHash(user.getPassword().getBytes(), "SHA-512"));
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            userToUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         return userRepository.save(userToUpdate);
     }

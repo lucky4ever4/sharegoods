@@ -13,16 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@CrossOrigin
 @RestController
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
-
-    public void setItemService(ItemService itemService) {
-        this.itemService = itemService;
-    }
 
     @GetMapping("/users/{userId}/items")
     public ResponseEntity getItemsByUserId(@PathVariable("userId") Long userId) {

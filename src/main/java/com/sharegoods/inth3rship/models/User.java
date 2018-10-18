@@ -1,7 +1,5 @@
 package com.sharegoods.inth3rship.models;
 
-import com.sharegoods.inth3rship.helpers.hash.HashPassword;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -36,7 +34,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = HashPassword.getPasswordHash(password.getBytes(), "SHA-512");
+        this.password = password; // should already be hashed
     }
 
     public long getId() {

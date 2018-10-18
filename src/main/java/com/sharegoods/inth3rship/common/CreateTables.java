@@ -9,6 +9,7 @@ import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.core.io.ClassPathResource;
 
 import java.sql.Date;
@@ -22,8 +23,10 @@ public class CreateTables {
 
     @Bean
     CommandLineRunner usersSampleData(UserRepository repository) {
-        oxana = new User("Oxana", "Lastname", "oxana@gmail.com", "123");
-        ion = new User("Ion", "Lastname", "ion@gmail.com", "asjashdl");
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        oxana = new User("Oxana", "Lastname", "oxana@gmail.com", passwordEncoder.encode("123"));
+        ion = new User("Ion", "FamilyName", "ion@gmail.com", passwordEncoder.encode("321"));
 
         return args -> {
             repository.save(oxana);
