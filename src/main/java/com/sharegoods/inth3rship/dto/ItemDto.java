@@ -13,6 +13,7 @@ public class ItemDto {
     String title;
     String description;
     Date dateTime;
+    String author;
 
     public ItemDto(Item item) {
         this.id = item.getId();
@@ -20,6 +21,7 @@ public class ItemDto {
         this.description = item.getDescription();
         this.userId = item.getUser().getId();
         this.dateTime = item.getDateTime();
+        this.author = item.getUser().getFirstName() + ' ' +  item.getUser().getLastName();
     }
 
     public static List<ItemDto> getItemDtoList(List<Item> itemList) {
@@ -70,5 +72,13 @@ public class ItemDto {
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
