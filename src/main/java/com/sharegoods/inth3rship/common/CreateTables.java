@@ -9,6 +9,7 @@ import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.core.io.ClassPathResource;
 
@@ -27,6 +28,8 @@ public class CreateTables {
 
     @Bean
     CommandLineRunner usersSampleData(UserRepository repository) {
+
+//        ScriptUtils.executeSqlScript();
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.users.add(new User("Oxana", "Dunav", "oxana.dunav@gmail.com", passwordEncoder.encode("123")));
@@ -58,7 +61,7 @@ public class CreateTables {
         this.items.add(new Item(this.users.get(1), Date.valueOf("2018-10-12"), "Laptop", "very nice condition"));
         this.items.add(new Item(this.users.get(2), Date.valueOf("2018-10-14"), "Laptop", "very nice condition"));
         this.items.add(new Item(this.users.get(4), Date.valueOf("2018-10-16"), "Laptop", "very nice condition"));
-        this.items.add(new Item(this.users.get(7), Date.valueOf("2018-10-19"), "Laptop", "very nice condition"));
+        this.items.add(new Item(this.users.get(7), Date.valueOf("2018-10-18"), "Laptop", "very nice condition"));
 
         return args -> {
             for (Item item : items) {

@@ -48,13 +48,15 @@ public class UserService implements UserDetailsService {
         return optionalUser.get();
     }
 
-    public boolean checkLoginData(String email, String password) {
+    public User checkLoginData(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            return passwordEncoder.matches(password,user.getPassword());
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            }
         }
-        return false;
+        return null;
     }
 
     public User createNewUser(User newUser) {

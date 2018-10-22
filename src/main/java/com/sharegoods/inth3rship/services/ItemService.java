@@ -17,10 +17,6 @@ public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
-    public void setItemRepository(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
-
     @Autowired
     private UserService userService;
 

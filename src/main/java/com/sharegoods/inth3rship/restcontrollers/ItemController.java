@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -50,6 +51,10 @@ public class ItemController {
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body("No items found");
         }
         List<ItemDto> itemDtoList = ItemDto.getItemDtoList(itemList);
+
+        Comparator<ItemDto> comparator = (t1, t2) -> t2.getDateTime().compareTo(t1.getDateTime());
+        itemDtoList.sort(comparator);
+
         return ResponseEntity.status(HttpStatus.OK).body(itemDtoList);
     }
 
