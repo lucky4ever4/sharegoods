@@ -29,7 +29,7 @@ public class Item {
     @NotNull
     private String description;
 
-    public Item() { // Default constuctor for JPA
+    public Item() { // Default constructor for JPA
     }
 
     public Item(User user, Date dateTime, String title, String description) {
@@ -39,41 +39,31 @@ public class Item {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public Date getDateTime() {
-        return dateTime;
-    }
+    public Date getDateTime() { return dateTime; }
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
     public void setDescription(String description) {
         this.description = description;

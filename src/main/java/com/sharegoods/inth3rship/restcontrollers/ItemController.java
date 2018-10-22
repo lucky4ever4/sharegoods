@@ -3,6 +3,7 @@ package com.sharegoods.inth3rship.restcontrollers;
 import com.sharegoods.inth3rship.dto.ImageDto;
 import com.sharegoods.inth3rship.dto.ItemDetailsDto;
 import com.sharegoods.inth3rship.dto.ItemDto;
+import com.sharegoods.inth3rship.dto.ItemThumbnailsDto;
 import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.services.ImageService;
@@ -13,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -50,12 +51,10 @@ public class ItemController {
         if (itemList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body("No items found");
         }
-        List<ItemDto> itemDtoList = ItemDto.getItemDtoList(itemList);
+        Map<Item, Image> itemHashMap = itemService.getItemsWithThumbnails(itemList);
 
-        Comparator<ItemDto> comparator = (t1, t2) -> t2.getDateTime().compareTo(t1.getDateTime());
-        itemDtoList.sort(comparator);
-
-        return ResponseEntity.status(HttpStatus.OK).body(itemDtoList);
+        List<ItemThumbnailsDto> itemThumbnailsDtoList = ItemThumbnailsDto.getItemThumbnailsDtoList(itemHashMap);
+        return ResponseEntity.status(HttpStatus.OK).body(itemThumbnailsDtoList);
     }
 
     @PostMapping("/users/{id}/items")

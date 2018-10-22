@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class ItemDto {
+
     Long id;
     Long userId;
     String title;
@@ -24,7 +25,7 @@ public class ItemDto {
         this.author = item.getUser().getFirstName() + ' ' +  item.getUser().getLastName();
     }
 
-    public static List<ItemDto> getItemDtoList(List<Item> itemList) {
+        public static List<ItemDto> getItemDtoList(List<Item> itemList) {
         List<ItemDto> itemDtoList = new ArrayList<>();
         ListIterator<Item> itemsIterator = itemList.listIterator();
         while (itemsIterator.hasNext()) {
@@ -33,6 +34,7 @@ public class ItemDto {
         }
         return itemDtoList;
     }
+
 
     public Long getId() {
         return id;
@@ -81,4 +83,5 @@ public class ItemDto {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 }

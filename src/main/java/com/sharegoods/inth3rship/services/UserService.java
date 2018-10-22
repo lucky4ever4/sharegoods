@@ -1,7 +1,6 @@
 package com.sharegoods.inth3rship.services;
 
 import com.sharegoods.inth3rship.common.MyUserPrincipal;
-import com.sharegoods.inth3rship.helpers.hash.HashPassword;
 import com.sharegoods.inth3rship.models.User;
 import com.sharegoods.inth3rship.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

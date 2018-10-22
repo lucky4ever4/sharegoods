@@ -24,13 +24,16 @@ public class Image {
     @OnDelete(action = OnDeleteAction.CASCADE)
     public Item item;
 
+    private boolean thumbnail;
+
     public Image() { // Default constructor for JPA
     }
 
-    public Image(Item item, String name, byte[] imageData) {
+    public Image(Item item, String name, byte[] imageData, boolean thumbnail) {
         this.item = item;
         this.name = name;
         this.imageData = imageData;
+        this.thumbnail = thumbnail;
     }
 
     public Long getId() {
@@ -63,5 +66,13 @@ public class Image {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public boolean getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(boolean thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

@@ -11,9 +11,7 @@ public class ItemDetailsDto {
         this.imageDtoList = imageDtoList;
     }
 
-    public ItemDto getItemDto() {
-        return itemDto;
-    }
+    public ItemDto getItemDto() { return itemDto; }
 
     public void setItemDto(ItemDto itemDto) {
         this.itemDto = itemDto;
