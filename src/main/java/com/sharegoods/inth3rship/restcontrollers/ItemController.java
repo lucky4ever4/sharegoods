@@ -4,10 +4,13 @@ import com.sharegoods.inth3rship.dto.ImageDto;
 import com.sharegoods.inth3rship.dto.ItemDetailsDto;
 import com.sharegoods.inth3rship.dto.ItemDto;
 import com.sharegoods.inth3rship.dto.ItemThumbnailsDto;
+import com.sharegoods.inth3rship.exceptions.ItemNotFoundException;
+import com.sharegoods.inth3rship.exceptions.UserNotFoundException;
 import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
 import com.sharegoods.inth3rship.services.ImageService;
 import com.sharegoods.inth3rship.services.ItemService;
+import com.sharegoods.inth3rship.services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,9 @@ public class ItemController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private RatingService ratingService;
 
     @GetMapping("/users/{userId}/items")
     public ResponseEntity getItemsByUserId(@PathVariable("userId") Long userId) {
@@ -104,4 +110,26 @@ public class ItemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
         }
     }
+
+    /*
+    By posting Rating, every time we create (assign) a value to column "rating" in DB.
+     */
+    @PostMapping("/users/{userId}/items/{itemId}/rating")
+    public ResponseEntity updateRating(@PathVariable("userId") Long userId,
+                                       @PathVariable("itemId") Long itemId,
+                                       @RequestParam("rating") Double rating) {
+
+        try {
+            ratingService.createRating(userId, itemId, rating);
+            Item item = itemService.getItemById(itemId);
+            ItemDto itemDto = new ItemDto(item);
+            return ResponseEntity.status(HttpStatus.OK).body(itemDto);
+
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status((HttpStatus.NOT_FOUND)).body("User not found");
+        } catch (ItemNotFoundException e) {
+            return ResponseEntity.status((HttpStatus.NOT_FOUND)).body("Item not found");
+        }
+    }
+
 }

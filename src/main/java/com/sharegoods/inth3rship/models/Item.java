@@ -1,5 +1,6 @@
 package com.sharegoods.inth3rship.models;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,6 +29,9 @@ public class Item {
 
     @NotNull
     private String description;
+
+    @Formula("select avg(r.rating) from Rating r where r.item_id = id")
+    private Double rating;
 
     public Item() { // Default constructor for JPA
     }
@@ -67,5 +71,13 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 }
