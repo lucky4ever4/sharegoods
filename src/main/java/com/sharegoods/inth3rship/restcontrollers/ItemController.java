@@ -5,6 +5,7 @@ import com.sharegoods.inth3rship.dto.ItemDetailsDto;
 import com.sharegoods.inth3rship.dto.ItemDto;
 import com.sharegoods.inth3rship.dto.ItemThumbnailsDto;
 import com.sharegoods.inth3rship.exceptions.ItemNotFoundException;
+import com.sharegoods.inth3rship.exceptions.RatingException;
 import com.sharegoods.inth3rship.exceptions.UserNotFoundException;
 import com.sharegoods.inth3rship.models.Image;
 import com.sharegoods.inth3rship.models.Item;
@@ -129,6 +130,8 @@ public class ItemController {
             return ResponseEntity.status((HttpStatus.NOT_FOUND)).body("User not found");
         } catch (ItemNotFoundException e) {
             return ResponseEntity.status((HttpStatus.NOT_FOUND)).body("Item not found");
+        } catch (RatingException e) {
+            return ResponseEntity.status((HttpStatus.NOT_FOUND)).body("Rating is not allowd");
         }
     }
 
